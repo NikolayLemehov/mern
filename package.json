@@ -1,0 +1,35 @@
+{
+  "name": "mern-test",
+  "version": "1.0.0",
+  "description": "Mern stack",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "server": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NikolayLemehov/mern.git"
+  },
+  "keywords": [
+    "mern",
+    "react"
+  ],
+  "author": "Mykola Liemiekhov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NikolayLemehov/mern/issues"
+  },
+  "homepage": "https://github.com/NikolayLemehov/mern#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.13.1"
+  },
+  "devDependencies": {
+    "@htmlacademy/editorconfig-cli": "1.x",
+    "eslint": "7.5.0",
+    "eslint-config-htmlacademy": "0.4.x",
+    "concurrently": "^6.2.0",
+    "nodemon": "^2.0.9"
+  }
+}
