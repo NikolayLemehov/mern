@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@htmlacademy/editorconfig-cli": "1.x",
-    "eslint": "7.5.0",
+    "eslint": "7.15.0",
     "eslint-config-htmlacademy": "0.4.x",
     "concurrently": "^6.2.0",
     "nodemon": "^2.0.9"
