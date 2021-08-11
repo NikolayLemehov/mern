@@ -1,0 +1,26 @@
+.card-action {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.input-field.focus-yellow {
+  input {
+    border-bottom: 1px solid #ffffff !important;
+    box-shadow: 0 1px 0 0 #ffffff !important;
+
+    & + label {
+      color: #ffffff !important;
+    }
+
+    &:focus {
+      border-bottom: 1px solid #ffeb3b !important;
+      box-shadow: 0 1px 0 0 #ffeb3b !important;
+
+      & + label {
+        color: #ffeb3b !important;
+      }
+    }
+  }
+}
