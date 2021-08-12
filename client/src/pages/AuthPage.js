@@ -19,7 +19,6 @@ const AuthPage = () => {
     try {
       const data  = await request('/api/auth/register', 'POST', {...form})
       message(data.message)
-      console.log('data', data)
     } catch (e) {}
   }
 
