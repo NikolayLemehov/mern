@@ -41,31 +41,36 @@ router.post(
     '/login',
     [
       check('email', 'Не корректный email').normalizeEmail().isEmail(),
-      check('password', 'Введите пароль').exists
+      check('password', 'Введите пароль').exists()
     ],
     async (req, res) => {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return res.status(400).json({
-          errors: errors.array(),
-          message: 'Не корректные данные при входе в систему',
-        });
+      try {
+        console.log('/login');
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(400).json({
+            errors: errors.array(),
+            message: 'Не корректные данные при входе в систему',
+          });
+        }
+        const {email, password} = req.body;
+        const user = await User.findOne({email});
+        if (!user) {
+          return res.status(400).json({message: 'Пользователь не найден'});
+        }
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+          return res.status(400).json({message: 'Не верный пароль'});
+        }
+        const token = jwt.sign(
+            {userId: user.id},
+            config.get('jwtSecret'),
+            {expiresIn: '1h'}
+        );
+        return res.status(200).json({token, userId: user.id});
+      } catch (e) {
+        return res.status(500).json({message: 'Что-то пошло не так /login, попробуйте снова'});
       }
-      const {email, password} = req.body;
-      const user = await User.findOne({email});
-      if (!user) {
-        return res.status(400).json({message: 'Пользователь не найден'});
-      }
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
-        return res.status(400).json({message: 'Не верный пароль'});
-      }
-      const token = jwt.sign(
-          {userId: user.id},
-          config.get('jwtSecret'),
-          {expiresIn: '1h'}
-      );
-      return res.status(200).json({token, userId: user.id});
     });
 
 module.exports = router;
